@@ -1,7 +1,7 @@
-# menu.py
 import pygame
 import pygame_gui
 from pygame_gui.core import ObjectID
+from login import display_login_form 
 
 def main_menu(manager, window_surface, background, SCREEN_WIDTH, SCREEN_HEIGHT):
     """
@@ -43,3 +43,13 @@ def main_menu(manager, window_surface, background, SCREEN_WIDTH, SCREEN_HEIGHT):
     )
 
     return play_button, quit_button
+
+
+def handle_menu_event(event, play_button, manager, window_surface, background, SCREEN_WIDTH, SCREEN_HEIGHT):
+    """
+    Handle menu button click events.
+    """
+    if event.user_type == pygame_gui.UI_BUTTON_PRESSED:
+        if event.ui_element == play_button:
+            # Trigger login form display
+            display_login_form(manager, window_surface, background, SCREEN_WIDTH, SCREEN_HEIGHT)

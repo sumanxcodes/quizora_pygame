@@ -24,6 +24,7 @@ clock = pygame.time.Clock()
 
 # States for different screens
 MENU_STATE = "menu"
+LOGIN_STATE = "login"
 PLAY_STATE = "play"
 SETTINGS_STATE = "settings"
 QUIT_STATE = "quit"
