@@ -1,0 +1,13 @@
+__pycache__/
+*.py[cod]
+*.sqlite3
+*.log
+*.pot
+*.pyc
+.DS_Store
+
+# Ignore .env file
+.env
+
+# Add your virtual environment folder
+quizora_game_env/
