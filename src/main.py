@@ -5,6 +5,7 @@ from settings import SCREEN_WIDTH, SCREEN_HEIGHT
 from ui.menu import enter_menu, handle_menu_events
 from ui.login import enter_login, handle_login_events
 from ui.post_login import enter_post_login, handle_post_login_events
+from ui.leaderboard import enter_leaderboard
 
 # Initialize Pygame
 pygame.init()
@@ -27,6 +28,7 @@ MENU_STATE = "menu"
 LOGIN_STATE = "login"
 POST_LOGIN_STATE = "post_login"
 QUIT_STATE = "quit"
+LEADERBOARD_STATE = "leaderboard"
 
 # Initial state
 current_state = MENU_STATE
@@ -67,7 +69,16 @@ while is_running[0]:
             if not state_initialized:
                 current_buttons = enter_post_login(manager, window_surface, background, SCREEN_WIDTH, SCREEN_HEIGHT)
                 state_initialized = True
-            handle_post_login_events(event, current_buttons, is_running)
+            handle_post_login_events(event, switch_state, current_buttons, is_running)
+        
+        elif current_state == LEADERBOARD_STATE:
+            if not state_initialized:
+                current_buttons = enter_leaderboard(manager, window_surface, background, SCREEN_WIDTH, SCREEN_HEIGHT)
+                state_initialized = True
+            if event.type == pygame_gui.UI_BUTTON_PRESSED and event.ui_element == current_buttons[0]:
+                switch_state(POST_LOGIN_STATE)
+            
+            
 
         
 
