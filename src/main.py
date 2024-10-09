@@ -1,4 +1,5 @@
 # main.py
+import os
 import pygame
 import pygame_gui
 from settings import SCREEN_WIDTH, SCREEN_HEIGHT
@@ -15,10 +16,22 @@ pygame.display.set_caption("Quizora")
 window_surface = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 
 background = pygame.Surface((SCREEN_WIDTH, SCREEN_HEIGHT))
-background.fill(pygame.Color('#000000'))
+background.fill(pygame.Color('#141414'))
+
+theme_path = 'src/theme.json'
+
+# Check if the theme file exists
+if os.path.exists(theme_path):
+    print("Loading theme file:", theme_path)
+    manager = pygame_gui.UIManager((SCREEN_WIDTH, SCREEN_HEIGHT), theme_path)
+else:
+    print("Theme file not found. Using default theme.")
+    manager = pygame_gui.UIManager((SCREEN_WIDTH, SCREEN_HEIGHT)) 
+
+
 
 # Set up UI manager
-manager = pygame_gui.UIManager((SCREEN_WIDTH, SCREEN_HEIGHT), 'theme.json')
+manager = pygame_gui.UIManager((SCREEN_WIDTH, SCREEN_HEIGHT), theme_path)
 
 # Game clock
 clock = pygame.time.Clock()

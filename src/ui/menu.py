@@ -1,6 +1,7 @@
 import pygame
 import pygame_gui
 from pygame_gui.core import ObjectID
+from settings import BTN_WIDTH, BTN_HEIGHT, LABEL_HEIGHT, LABEL_WIDTH, LARGE_LABEL_HEIGHT,LARGE_LABEL_WIDTH
 
 
 def enter_menu(manager, window_surface, background, SCREEN_WIDTH, SCREEN_HEIGHT):
@@ -9,13 +10,29 @@ def enter_menu(manager, window_surface, background, SCREEN_WIDTH, SCREEN_HEIGHT)
     """
     manager.clear_and_reset()
 
+    # Welcome Message
+    welcome_message_title = f"Welcome to Quizora!"
+    pygame_gui.elements.UILabel(
+        relative_rect=pygame.Rect(((SCREEN_WIDTH - LARGE_LABEL_WIDTH)// 2, SCREEN_HEIGHT // 2 - 300), (LARGE_LABEL_WIDTH, LARGE_LABEL_HEIGHT)),
+        text=welcome_message_title,
+        manager=manager,
+        object_id=ObjectID(class_id='@title_text')
+    )
+    welcome_message_subtitle = f"Let the adventure begins!"
+    pygame_gui.elements.UILabel(
+        relative_rect=pygame.Rect(((SCREEN_WIDTH - LARGE_LABEL_WIDTH)// 2, SCREEN_HEIGHT // 2 - 250), (LARGE_LABEL_WIDTH, LARGE_LABEL_HEIGHT)),
+        text=welcome_message_subtitle,
+        manager=manager,
+        object_id=ObjectID(class_id='@subtitle_text')
+    )
+
     login_button = pygame_gui.elements.UIButton(
-        relative_rect=pygame.Rect((SCREEN_WIDTH // 2 - 100, SCREEN_HEIGHT // 2 - 40), (200, 50)),
+        relative_rect=pygame.Rect(((SCREEN_WIDTH - BTN_WIDTH) // 2, SCREEN_HEIGHT // 2 - 40), (BTN_WIDTH, BTN_HEIGHT)),
         text='Login',
         manager=manager
     )
     quit_button = pygame_gui.elements.UIButton(
-        relative_rect=pygame.Rect((SCREEN_WIDTH // 2 - 100, SCREEN_HEIGHT // 2 + 40), (200, 50)),
+        relative_rect=pygame.Rect(((SCREEN_WIDTH - BTN_WIDTH) // 2, SCREEN_HEIGHT // 2 + 40), (BTN_WIDTH, BTN_HEIGHT)),
         text='Quit',
         manager=manager
     )

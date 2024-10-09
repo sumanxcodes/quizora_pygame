@@ -1,12 +1,12 @@
 {
   "defaults": {
     "colours": {
-      "normal_bg": "#ffff",
+      "normal_bg": "#ffffff",
       "hovered_bg": "#35393e",
       "disabled_bg": "#25292e",
       "selected_bg": "#193754",
       "dark_bg": "#15191e",
-      "normal_text": "#c5cbd8",
+      "normal_text": "#EEF0F2",
       "hovered_text": "#FFFFFF",
       "selected_text": "#FFFFFF",
       "disabled_text": "#6d736f",
@@ -25,18 +25,18 @@
   },
   "button": {
     "colours": {
-      "normal_bg": "#ffffff",
-      "hovered_bg": "#35393e",
+      "normal_bg": "#EEC643",
+      "hovered_bg": "#333333",
       "disabled_bg": "#25292e",
       "selected_bg": "#193754",
       "active_bg": "#193754",
       "dark_bg": "#15191e",
-      "normal_text": "#c5cbd8",
+      "normal_text": "#141414",
       "hovered_text": "#FFFFFF",
       "selected_text": "#FFFFFF",
       "disabled_text": "#6d736f",
       "active_text": "#FFFFFF",
-      "normal_border": "#DDDDDD",
+      "normal_border": "#EEF0F2",
       "hovered_border": "#B0B0B0",
       "disabled_border": "#808080",
       "selected_border": "#8080B0",
@@ -48,21 +48,24 @@
     "font": {
       "name": "PressStart2P",
       "size": 16,
-      "regular_path": "../assets/fonts/PressStart2P-Regular.ttf"
+      "regular_path": "./assets/fonts/PressStart2P-Regular.ttf"
     }
   },
   "@title_text": {
     "font": {
       "name": "PressStart2P",
       "size": 30,
-      "regular_path": "../assets/fonts/PressStart2P-Regular.ttf"
+      "regular_path": "./assets/fonts/PressStart2P-Regular.ttf"
+    },
+    "colours": {
+      "normal_text": "#EEF0F2"
     }
   },
   "@subtitle_text": {
     "font": {
       "name": "PressStart2P",
-      "size": 14,
-      "regular_path": "../assets/fonts/PressStart2P-Regular.ttf"
+      "size": 16,
+      "regular_path": "./assets/fonts/PressStart2P-Regular.ttf"
     }
   }
 }

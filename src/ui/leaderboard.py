@@ -2,7 +2,9 @@
 import pygame
 import pygame_gui
 from session_manager import SessionManager
+from pygame_gui.core import ObjectID
 from collections import defaultdict
+from settings import LARGE_LABEL_HEIGHT, LARGE_LABEL_WIDTH
 
 def fetch_leaderboard_data():
     """
@@ -30,9 +32,10 @@ def enter_leaderboard(manager, window_surface, background, SCREEN_WIDTH, SCREEN_
 
     # Display leaderboard title
     pygame_gui.elements.UILabel(
-        relative_rect=pygame.Rect((SCREEN_WIDTH // 2 - 100, 20), (200, 50)),
+        relative_rect=pygame.Rect(((SCREEN_WIDTH - LARGE_LABEL_WIDTH )// 2, 20), (LARGE_LABEL_WIDTH, LARGE_LABEL_HEIGHT)),
         text="Leaderboard",
-        manager=manager
+        manager=manager,
+        object_id=ObjectID(class_id='@title_text')
     )
     
     # Display leaderboard items (Example: rank, username, score)
@@ -54,16 +57,18 @@ def enter_leaderboard(manager, window_surface, background, SCREEN_WIDTH, SCREEN_
     for index, (student, total_score) in enumerate(sorted_leaderboard):
         rank_text = f"{index + 1}. {student} - Score: {total_score}"
         pygame_gui.elements.UILabel(
-            relative_rect=pygame.Rect((SCREEN_WIDTH // 2 - 150, y_offset), (300, 30)),
+            relative_rect=pygame.Rect(((SCREEN_WIDTH - LARGE_LABEL_WIDTH) // 2, y_offset), (LARGE_LABEL_WIDTH, LARGE_LABEL_HEIGHT)),
             text=rank_text,
-            manager=manager
+            manager=manager,
+            object_id=ObjectID(class_id='@subtitle_text')
+
         )
         y_offset += 40  # Space between entries
         
 
     # Back button to return to the post-login menu
     back_button = pygame_gui.elements.UIButton(
-        relative_rect=pygame.Rect((SCREEN_WIDTH // 2 - 100, SCREEN_HEIGHT - 70), (200, 50)),
+        relative_rect=pygame.Rect((SCREEN_WIDTH // 2 - 100, SCREEN_HEIGHT - 90), (200, 50)),
         text='Back',
         manager=manager
     )

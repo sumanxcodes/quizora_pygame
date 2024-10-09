@@ -2,6 +2,7 @@ import pygame
 import pygame_gui
 from pygame_gui.core import ObjectID
 from session_manager import SessionManager
+from settings import BTN_WIDTH, BTN_HEIGHT, TXTFIELD_WIDTH, TXTFIELD_HEIGHT
 
 def enter_login(manager, window_surface, background, SCREEN_WIDTH, SCREEN_HEIGHT):
     """
@@ -20,32 +21,36 @@ def enter_login(manager, window_surface, background, SCREEN_WIDTH, SCREEN_HEIGHT
     pygame_gui.elements.UILabel(
         relative_rect=pygame.Rect((SCREEN_WIDTH // 2 - 100, SCREEN_HEIGHT // 2 - 100), (200, 50)),
         text='Username',
-        manager=manager
+        manager=manager,
+        object_id=ObjectID(class_id='@subtitle_text')
     )
     username_input = pygame_gui.elements.UITextEntryLine(
-        relative_rect=pygame.Rect((SCREEN_WIDTH // 2 - 100, SCREEN_HEIGHT // 2 - 50), (200, 50)),
-        manager=manager
+        relative_rect=pygame.Rect(((SCREEN_WIDTH - TXTFIELD_WIDTH) // 2, SCREEN_HEIGHT // 2 - 50), (TXTFIELD_WIDTH, TXTFIELD_HEIGHT)),
+        manager=manager,
+        object_id=ObjectID(class_id='@subtitle_text')
     )
 
      # Password Label and Input
     pygame_gui.elements.UILabel(
         relative_rect=pygame.Rect((SCREEN_WIDTH // 2 - 100, SCREEN_HEIGHT // 2), (200, 50)),
         text='Password',
-        manager=manager
+        manager=manager,
+        object_id=ObjectID(class_id='@subtitle_text')
     )
     password_input = pygame_gui.elements.UITextEntryLine(
-        relative_rect=pygame.Rect((SCREEN_WIDTH // 2 - 100, SCREEN_HEIGHT // 2 + 50), (200, 50)),
-        manager=manager
+        relative_rect=pygame.Rect(((SCREEN_WIDTH - TXTFIELD_WIDTH) // 2, SCREEN_HEIGHT // 2 + 50), (TXTFIELD_WIDTH, TXTFIELD_HEIGHT)),
+        manager=manager,
+        object_id=ObjectID(class_id='@subtitle_text')
     )
     password_input.set_text_hidden(True)  # Hide password characters
 
     login_button = pygame_gui.elements.UIButton(
-        relative_rect=pygame.Rect((SCREEN_WIDTH // 2 - 100, SCREEN_HEIGHT // 2 + 120), (200, 50)),
+        relative_rect=pygame.Rect(((SCREEN_WIDTH - BTN_WIDTH) // 2, SCREEN_HEIGHT // 2 + 150), (BTN_WIDTH, BTN_HEIGHT)),
         text='Login',
         manager=manager
     )
     back_button = pygame_gui.elements.UIButton(
-        relative_rect=pygame.Rect((SCREEN_WIDTH // 2 - 100, SCREEN_HEIGHT // 2 + 190), (200, 50)),
+        relative_rect=pygame.Rect(((SCREEN_WIDTH - BTN_WIDTH) // 2, SCREEN_HEIGHT // 2 + 220), (BTN_WIDTH, BTN_HEIGHT)),
         text='Back',
         manager=manager
     )
