@@ -279,15 +279,14 @@ correctIndex=3
 game1.addScreen(question,ansBox, answers, correctIndex, green)
 
 
-question=Rectangle(15, 15, 180, 30, 0, "Hi Mr. where are You?", yellow, blue)
-ansBox=Rectangle(200, 15, 180, 30, 1, "", red, blue)
-answers=[Rectangle(10, 180, 75, 30, 1, "Melbourne", blue, red),
-            Rectangle(90, 180, 75, 30, 1, "Colombo", blue, red),
-            Rectangle(170, 180, 75, 30, 1, "Malabe", blue, red),
-            Rectangle(250, 180, 75, 30, 1, "Matara", blue, red)]
-correctIndex=0
-canvas=game1.addScreen(question,ansBox, answers, correctIndex, blue)
-
+question=Rectangle(15, 80, 370, 30, 0, "Drag the missing number to complete the equation: 5 + __ = 9", yellow, blue)
+ansBox=Rectangle(340, 80, 30, 30, 1, "", yellow, blue)
+answers=[Rectangle(150, 180, 20, 20, 0, "3", magenta, black),
+            Rectangle(180, 180, 20, 20, 0, "4", magenta, black),
+            Rectangle(210, 180, 20, 20, 0, "1", magenta, black),
+            Rectangle(240, 180, 20, 20, 0, "7", magenta, black)]
+correctIndex=1
+game1.addScreen(question,ansBox, answers, correctIndex, green)
 
 while True:
     keystroke(game1)
