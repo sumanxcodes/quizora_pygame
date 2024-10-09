@@ -1,4 +1,12 @@
 import requests
+from utils import get_api_endpoint
+
+login_url = get_api_endpoint("login")
+logout_url = get_api_endpoint("logout")
+user_info_url = get_api_endpoint("user_info")
+
+# Now you can use these URLs in your API requests
+
 
 class SessionManager:
     _session = None  # private attribute <- store session value
@@ -8,7 +16,7 @@ class SessionManager:
         """
         Authenticates the user and stores the session if successful.
         """
-        login_url = 'http://localhost:8000/api/login/'  # Adjust endpoint as needed
+        login_url = get_api_endpoint("login")  # Login endpoint
         credentials = {'username': username, 'password': password}
         
         try:

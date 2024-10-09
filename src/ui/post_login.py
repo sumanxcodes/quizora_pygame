@@ -5,11 +5,12 @@ from session_manager import SessionManager
 from ui.leaderboard import enter_leaderboard
 from pygame_gui.core import ObjectID
 from settings import BTN_WIDTH, BTN_HEIGHT, LABEL_HEIGHT, LABEL_WIDTH, LARGE_LABEL_HEIGHT, LARGE_LABEL_WIDTH
+from utils import get_api_endpoint
 
 def fetch_user_info():
     session = SessionManager.get_session()
     if session:
-        response = session.get('http://localhost:8000/api/user-info/')
+        response = session.get(get_api_endpoint("user_info"))
         if response.status_code == 200:
             user_info = response.json()
             return user_info

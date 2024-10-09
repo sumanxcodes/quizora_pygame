@@ -5,6 +5,7 @@ from session_manager import SessionManager
 from pygame_gui.core import ObjectID
 from collections import defaultdict
 from settings import LARGE_LABEL_HEIGHT, LARGE_LABEL_WIDTH
+from utils import get_api_endpoint
 
 def fetch_leaderboard_data():
     """
@@ -12,7 +13,7 @@ def fetch_leaderboard_data():
     """
     session = SessionManager.get_session()
     if session:
-        response = session.get('http://localhost:8000/api/quizresults/')
+        response = session.get(get_api_endpoint("quiz_result"))
         if response.status_code == 200:
             return response.json()
         else:
