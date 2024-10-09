@@ -1,7 +1,7 @@
 {
   "defaults": {
     "colours": {
-      "normal_bg": "#45494e",
+      "normal_bg": "#ffff",
       "hovered_bg": "#35393e",
       "disabled_bg": "#25292e",
       "selected_bg": "#193754",
@@ -25,7 +25,7 @@
   },
   "button": {
     "colours": {
-      "normal_bg": "#45494e",
+      "normal_bg": "#ffffff",
       "hovered_bg": "#35393e",
       "disabled_bg": "#25292e",
       "selected_bg": "#193754",

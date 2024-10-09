@@ -2,9 +2,9 @@
 import pygame
 import pygame_gui
 from settings import SCREEN_WIDTH, SCREEN_HEIGHT
-from ui.menu import main_menu
-from ui.play import play_screen
-from ui.settings import settings_screen
+from ui.menu import enter_menu, handle_menu_events
+from ui.login import enter_login, handle_login_events
+from ui.post_login import enter_post_login, handle_post_login_events
 
 # Initialize Pygame
 pygame.init()
@@ -25,51 +25,57 @@ clock = pygame.time.Clock()
 # States for different screens
 MENU_STATE = "menu"
 LOGIN_STATE = "login"
-PLAY_STATE = "play"
-SETTINGS_STATE = "settings"
+POST_LOGIN_STATE = "post_login"
 QUIT_STATE = "quit"
 
 # Initial state
 current_state = MENU_STATE
 current_buttons = []
+state_initialized = False  # flag to control state initilization
+is_running = [True]
 
 
-# Main game loop
-is_running = True
+def switch_state(new_state):
+    global current_state, state_initialized
+    current_state = new_state
+    state_initialized = False  # Reset state  
 
-while is_running:
+while is_running[0]:
     time_delta = clock.tick(60) / 1000.0
+    
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
-            is_running = False
+            is_running[0] = False
 
         # Handle UI manager events
         manager.process_events(event)
 
         # Check button clicks and change states
-        if current_state == MENU_STATE:
-            if event.type == pygame.USEREVENT and event.user_type == pygame_gui.UI_BUTTON_PRESSED:
-                if event.ui_element == current_buttons[0]:
-                    current_state = PLAY_STATE  # Switch to Play screen
-                elif event.ui_element == current_buttons[1]:
-                    current_state = SETTINGS_STATE  # Switch to Settings screen
-                elif event.ui_element == current_buttons[2]:
-                    is_running = False  # Quit game
-        elif current_state == PLAY_STATE or current_state == SETTINGS_STATE:
-            if event.type == pygame.USEREVENT and event.user_type == pygame_gui.UI_BUTTON_PRESSED:
-                if event.ui_element == current_buttons[0]:
-                    current_state = MENU_STATE  # Back to menu
+        if current_state == MENU_STATE:   
+            if not state_initialized:
+                current_buttons = enter_menu(manager, window_surface, background, SCREEN_WIDTH, SCREEN_HEIGHT)
+                state_initialized = True      
+            handle_menu_events(event, current_buttons, switch_state, is_running)
+        
+        elif current_state == LOGIN_STATE:
+            if not state_initialized:
+                current_buttons = enter_login(manager, window_surface, background, SCREEN_WIDTH, SCREEN_HEIGHT)
+                state_initialized = True
+            handle_login_events(event, current_buttons, switch_state)
+
+        elif current_state == POST_LOGIN_STATE:
+            if not state_initialized:
+                current_buttons = enter_post_login(manager, window_surface, background, SCREEN_WIDTH, SCREEN_HEIGHT)
+                state_initialized = True
+            handle_post_login_events(event, current_buttons, is_running)
+
+        
 
     # Update UI elements based on the state
     manager.update(time_delta)
 
     # Draw UI based on state
-    if current_state == MENU_STATE:
-        current_buttons = main_menu(manager, window_surface, background, SCREEN_WIDTH, SCREEN_HEIGHT)
-    elif current_state == PLAY_STATE:
-        current_buttons = play_screen(manager, window_surface, background)
-    elif current_state == SETTINGS_STATE:
-        current_buttons = settings_screen(manager, window_surface, background)
+    window_surface.blit(background, (0, 0)) 
 
     manager.draw_ui(window_surface)
     pygame.display.update()
