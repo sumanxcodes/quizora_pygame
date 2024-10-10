@@ -5,12 +5,12 @@ import random
 pygame.init()
 
 # Colors
-WHITE = (255, 255, 255)
-GREEN = (0, 255, 0)
-DARK_GREEN = (0, 200, 0)
 BLACK = (0, 0, 0)
+Yellow = (255, 255, 0)
+DARK_Yellow = (200, 200, 0)
+WHITE = (255, 255, 255)
 
-# Set up display
+
 screen_width = 600
 screen_height = 400
 screen = pygame.display.set_mode((screen_width, screen_height))
@@ -29,6 +29,7 @@ class Button:
         self.color = color
         self.hover_color = hover_color
         self.clicked = False
+        
     
     def draw(self, surface):
         mouse_pos = pygame.mouse.get_pos()
@@ -42,7 +43,7 @@ class Button:
         else:
             pygame.draw.rect(surface, self.color, self.rect)
 
-        # Render the text on the button
+        # text on the button
         text_surf = render_text(self.text, font, WHITE)
         text_rect = text_surf.get_rect(center=self.rect.center)
         surface.blit(text_surf, text_rect)
@@ -80,7 +81,7 @@ def main():
     clock = pygame.time.Clock()
 
     # Start Quiz button
-    button = Button(x=screen_width//2 - 100, y=screen_height//2 - 50, width=200, height=100, text="Start Quiz", color=GREEN, hover_color=DARK_GREEN)
+    button = Button(x=screen_width//2 - 100, y=screen_height//2 - 50, width=200, height=100, text="Start Quiz", color=Yellow, hover_color=DARK_Yellow)
 
     # particles for background animation
     particles = [Particle() for _ in range(50)]  
@@ -105,9 +106,9 @@ def main():
        
         if button.clicked:
             print("Quiz Starting...")
-            running = False  # You can change this to actually start the quiz logic
+            running = False  
 
-        # Update display
+        
         pygame.display.flip()
         clock.tick(60)
 
