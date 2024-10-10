@@ -44,6 +44,7 @@ POST_LOGIN_STATE = "post_login"
 QUIT_STATE = "quit"
 LEADERBOARD_STATE = "leaderboard"
 PLAY = "play"
+QUESTION = "question"
 
 # Initial state
 current_state = MENU_STATE
@@ -99,6 +100,9 @@ while is_running[0]:
                 state_initialized = True
             if event.type == pygame_gui.UI_BUTTON_PRESSED and event.ui_element == current_buttons[-1]:
                 switch_state(POST_LOGIN_STATE)
+            if event.type == pygame_gui.UI_BUTTON_PRESSED and event.ui_element != current_buttons[-1]:
+                switch_state(QUESTION)
+
         
 
     # Update UI elements based on the state
