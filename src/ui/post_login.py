@@ -79,6 +79,7 @@ def handle_post_login_events(event, switch_state, current_buttons, is_running):
     if event.type == pygame_gui.UI_BUTTON_PRESSED:
         if event.ui_element == current_buttons[0]:  # Play Quiz button
             print("Play Quiz clicked!")
+            switch_state('play')
         elif event.ui_element == current_buttons[1]:  # Help button
             print("Help clicked!")
         elif event.ui_element == current_buttons[2]:  # Leaderboard button

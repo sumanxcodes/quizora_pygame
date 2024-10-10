@@ -7,6 +7,7 @@ from ui.menu import enter_menu, handle_menu_events
 from ui.login import enter_login, handle_login_events
 from ui.post_login import enter_post_login, handle_post_login_events
 from ui.leaderboard import enter_leaderboard
+from ui.play import enter_quiz
 
 # Initialize Pygame
 pygame.init()
@@ -42,6 +43,7 @@ LOGIN_STATE = "login"
 POST_LOGIN_STATE = "post_login"
 QUIT_STATE = "quit"
 LEADERBOARD_STATE = "leaderboard"
+PLAY = "play"
 
 # Initial state
 current_state = MENU_STATE
@@ -90,8 +92,14 @@ while is_running[0]:
                 state_initialized = True
             if event.type == pygame_gui.UI_BUTTON_PRESSED and event.ui_element == current_buttons[0]:
                 switch_state(POST_LOGIN_STATE)
-            
-            
+
+        elif current_state == PLAY:
+            if not state_initialized:
+                current_buttons = enter_quiz(manager, window_surface, background, SCREEN_WIDTH, SCREEN_HEIGHT)
+                state_initialized = True
+            if event.type == pygame_gui.UI_BUTTON_PRESSED and event.ui_element == current_buttons[0]:
+                switch_state(POST_LOGIN_STATE)
+        
 
         
 
