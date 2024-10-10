@@ -41,13 +41,16 @@ def enter_quiz(manager, window_surface, background, SCREEN_WIDTH, SCREEN_HEIGHT)
     print(quiz_data)
     
     btn_gap = 600
+    quiz_btns = []
     for quiz in quiz_data:
         print(quiz['title'])
-        pygame_gui.elements.UIButton(
+        quiz_btn = pygame_gui.elements.UIButton(
         relative_rect=pygame.Rect((SCREEN_WIDTH // 2 - 100, SCREEN_HEIGHT - btn_gap), (200, 50)),
         text= quiz['title'],
         manager=manager)
         btn_gap -= 60
+        quiz_btns.append(quiz_btn)
+
         
     # Back button to return to the post-login menu
     back_button = pygame_gui.elements.UIButton(
@@ -55,5 +58,6 @@ def enter_quiz(manager, window_surface, background, SCREEN_WIDTH, SCREEN_HEIGHT)
         text='Back',
         manager=manager
     )
+    quiz_btns.append(back_button)
 
-    return [back_button]
+    return quiz_btns

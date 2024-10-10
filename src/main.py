@@ -97,10 +97,8 @@ while is_running[0]:
             if not state_initialized:
                 current_buttons = enter_quiz(manager, window_surface, background, SCREEN_WIDTH, SCREEN_HEIGHT)
                 state_initialized = True
-            if event.type == pygame_gui.UI_BUTTON_PRESSED and event.ui_element == current_buttons[0]:
+            if event.type == pygame_gui.UI_BUTTON_PRESSED and event.ui_element == current_buttons[-1]:
                 switch_state(POST_LOGIN_STATE)
-        
-
         
 
     # Update UI elements based on the state
