@@ -1,6 +1,5 @@
 from tkinter import messagebox
 import tkinter as tk
-
 import pygame, sys
 
 pygame.init()
