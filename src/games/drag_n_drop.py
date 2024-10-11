@@ -1,5 +1,6 @@
 from tkinter import messagebox
 import tkinter as tk
+
 import pygame, sys
 
 pygame.init()
@@ -22,7 +23,7 @@ FILL_BLANKS=2
 
 X_DIST = 400
 Y_DIST = 400
-font = pygame.font.SysFont("Arial", 18)
+font = pygame.font.SysFont("Arial", 18, bold=True)
 screen = pygame.display.set_mode((X_DIST, Y_DIST))
 screen.fill((255, 100, 100))
 pygame.display.set_caption("Hello")
@@ -54,11 +55,45 @@ class Game:
         self.currentScreenId = 0  # Start from 0 to ensure the first screen is rendered correctly
         self.currentScreen = None
         self.totalMarks=0
+        self.Question_BackGround_color = yellow
+        self.Question_Font_color = blue
+        self.Answer_BackGround_color = magenta
+        self.Answer_Font_color = black
+        self.AnswerBox_BackGround_color = yellow
+        ######################################################
+    ######################################################
+    ######################################################
 
-    def addScreen(self, question, ansBox,answers,correctIndex,qtype, color=(255, 255, 0, 200), X_DIST=400, Y_DIST=400):
-        # print(color)
+    def createQuestionRectangle(self,text):
+        return Rectangle(0, 80, 390, 30, 0, text, self.Question_BackGround_color, self.Question_Font_color)
+
+    def createAnswerRectangles(self,text):
+        answers = []
+        answerLength = 0
+        for t in text:
+            answerLength = max(answerLength, font.render(t, True, self.Answer_Font_color).get_width())
+
+        y_coord = 200
+        gap = 15
+        width_gap = 10
+        x_coord = (X_DIST - len(text) * (answerLength + gap + width_gap)) / 2
+
+        for t in text:
+            answers.append(Rectangle(x_coord, y_coord, answerLength + width_gap, 20, 0, t, self.Answer_BackGround_color,
+                                     self.Answer_Font_color))
+            x_coord = x_coord + answerLength + width_gap + gap
+        return answers
+
+    def createAnswerBoxRectangle(self):
+        return Rectangle(10, 130, X_DIST-20, 30, 2, "", yellow, blue)
+
+    ######################################################
+    ######################################################
+    ######################################################
+
+    def addScreen(self, question, answers,correctIndex,qtype, color=(255, 255, 0, 200), X_DIST=400, Y_DIST=400):
         gameScreen= GameScreen( color, X_DIST, Y_DIST)
-        gameScreen.add_questions(question, ansBox,answers,correctIndex,qtype)
+        gameScreen.add_questions(self.createQuestionRectangle(question), self.createAnswerBoxRectangle(),self.createAnswerRectangles(answers),correctIndex,qtype)
         self.screens.append(gameScreen)
 
         if len(self.screens) == 1:  # Set the first screen as the current screen
@@ -289,26 +324,13 @@ def keystroke(game):
 #############################################################
 
 game1= Game()
-
-
-question=Rectangle(0, 80, 390, 30, 0, "Select the suitable answer to the space  2, ___ , 6", yellow, blue)
-ansBox=Rectangle(180, 80, 30, 30, 1, "", yellow, blue)
-answers=[Rectangle(150, 180, 20, 20, 0, "1", magenta, black),
-            Rectangle(180, 180, 20, 20, 0, "2", magenta, black),
-            Rectangle(210, 180, 20, 20, 0, "3", magenta, black),
-            Rectangle(240, 180, 20, 20, 0, "4", magenta, black)]
+###########Question 1#############
 correctIndex=3
-game1.addScreen(question,ansBox, answers, correctIndex,MCQ, green)
+game1.addScreen("Select the suitable answer to the space  2, ___ , 6", ["1","2","3","4"], correctIndex,MCQ, green)
 
-
-question1=Rectangle(15, 15, 180, 30, 0, "Hi Mr. where are You?", green, blue)
-ansBox1=Rectangle(200, 15, 180, 30, 1, "", red, blue)
-answers1=[Rectangle(11, 180, 75, 30, 0, "Melbourne", blue, red),
-            Rectangle(91, 180, 75, 30, 0, "Colombo", blue, red),
-            Rectangle(171, 180, 75, 30, 0, "Malabe", blue, red),
-            Rectangle(251, 180, 75, 30, 0, "Matara", blue, red)]
+###########Question 2#############
 correctIndex1=0
-canvas=game1.addScreen(question1,ansBox1, answers1, correctIndex1,DRAG_N_DROP, green)
+game1.addScreen("Hi Mr. where are You?", ["Melbourne","Colombo","Malabe","Matara"], correctIndex,DRAG_N_DROP, green)
 
 
 while True:
