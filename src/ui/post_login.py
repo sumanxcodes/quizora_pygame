@@ -19,19 +19,18 @@ def fetch_user_info():
     else:
         print("User is not logged in.")
 
-def enter_post_login(manager, window_surface, background, SCREEN_WIDTH, SCREEN_HEIGHT):
+def enter_post_login(manager, window_surface, background, SCREEN_WIDTH, SCREEN_HEIGHT, state_data):
     """
     Initializes the post-login menu with Play Quiz, Help, Leaderboard, and Quit buttons.
     """
     manager.clear_and_reset()
     
     # Fetch user info to get the user's name for the welcome message
-    user_info = fetch_user_info()
-    if user_info.get('first_name', 'User') != "" and user_info.get('last_name', 'User') != "" :
-        name = f"{user_info.get('first_name', 'User')} {user_info.get('last_name', 'User')}"
-
+    state_data['user_info'] = fetch_user_info()
+    if state_data['user_info'].get('first_name', 'User') != "" and state_data['user_info'].get('last_name', 'User') != "" :
+        name = f"{state_data['user_info'].get('first_name', 'User')} {state_data['user_info'].get('last_name', 'User')}"
     else:
-       name =  user_info.get('username', 'User') if user_info else 'User'
+       name =  state_data['user_info'].get('username', 'User') if state_data['user_info'] else 'User'
     
     # Welcome Message
     welcome_message = f"Welcome to Quizora!"

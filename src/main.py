@@ -7,7 +7,8 @@ from ui.menu import enter_menu, handle_menu_events
 from ui.login import enter_login, handle_login_events
 from ui.post_login import enter_post_login, handle_post_login_events
 from ui.leaderboard import enter_leaderboard
-from ui.play import enter_quiz
+from ui.play import enter_quiz_view, handle_quiz_events, quiz_question_view, game_session_view
+from ui.questions_type import handle_question_events
 
 # Initialize Pygame
 pygame.init()
@@ -37,14 +38,25 @@ manager = pygame_gui.UIManager((SCREEN_WIDTH, SCREEN_HEIGHT), theme_path)
 # Game clock
 clock = pygame.time.Clock()
 
+# States and state data
+state_data = {
+   "user_info": None,
+   "quiz_data": None,
+   "question_data": None,
+   "active_quiz_index": None,
+   "active_question_index": None
+}
+
 # States for different screens
 MENU_STATE = "menu"
 LOGIN_STATE = "login"
 POST_LOGIN_STATE = "post_login"
 QUIT_STATE = "quit"
 LEADERBOARD_STATE = "leaderboard"
-PLAY = "play"
-QUESTION = "question"
+PLAY_STATE = "play"
+QUESTION_STATE = "question"
+GAME_SESSION_STATE = "game_session"
+MULTIPLE_CHOICE_STATE = "multiple_choice"
 
 # Initial state
 current_state = MENU_STATE
@@ -83,7 +95,7 @@ while is_running[0]:
 
         elif current_state == POST_LOGIN_STATE:
             if not state_initialized:
-                current_buttons = enter_post_login(manager, window_surface, background, SCREEN_WIDTH, SCREEN_HEIGHT)
+                current_buttons = enter_post_login(manager, window_surface, background, SCREEN_WIDTH, SCREEN_HEIGHT, state_data)
                 state_initialized = True
             handle_post_login_events(event, switch_state, current_buttons, is_running)
         
@@ -94,16 +106,32 @@ while is_running[0]:
             if event.type == pygame_gui.UI_BUTTON_PRESSED and event.ui_element == current_buttons[0]:
                 switch_state(POST_LOGIN_STATE)
 
-        elif current_state == PLAY:
+        elif current_state == PLAY_STATE:
             if not state_initialized:
-                current_buttons = enter_quiz(manager, window_surface, background, SCREEN_WIDTH, SCREEN_HEIGHT)
+                current_buttons = enter_quiz_view(manager, window_surface, background, SCREEN_WIDTH, SCREEN_HEIGHT, state_data)
                 state_initialized = True
-            if event.type == pygame_gui.UI_BUTTON_PRESSED and event.ui_element == current_buttons[-1]:
+            if event.type == pygame_gui.UI_BUTTON_PRESSED and event.ui_element == current_buttons[-1]: # Last button is back button
                 switch_state(POST_LOGIN_STATE)
             if event.type == pygame_gui.UI_BUTTON_PRESSED and event.ui_element != current_buttons[-1]:
-                switch_state(QUESTION)
+                handle_quiz_events(event, switch_state, current_buttons, state_data, is_running)
 
-        
+        elif current_state == QUESTION_STATE:
+            if not state_initialized:
+                current_buttons = quiz_question_view(manager, window_surface, background, SCREEN_WIDTH, SCREEN_HEIGHT, state_data)
+                state_initialized = True
+            if event.type == pygame_gui.UI_BUTTON_PRESSED and event.ui_element == current_buttons[1]:
+                switch_state(PLAY_STATE)
+            if event.type == pygame_gui.UI_BUTTON_PRESSED and event.ui_element == current_buttons[0]:
+                switch_state(GAME_SESSION_STATE)
+
+        elif current_state == GAME_SESSION_STATE:
+            if not state_initialized:
+                current_buttons = game_session_view(manager, window_surface, background, SCREEN_WIDTH, SCREEN_HEIGHT, state_data)
+                state_initialized = True
+            if event.type == pygame_gui.UI_BUTTON_PRESSED and event.ui_element == current_buttons[-1]: # Last button is back button
+                switch_state(PLAY_STATE)
+            if event.type == pygame_gui.UI_BUTTON_PRESSED and event.ui_element != current_buttons[-1]: # options buttons
+                handle_question_events(event, switch_state, current_buttons, state_data, is_running)
 
     # Update UI elements based on the state
     manager.update(time_delta)

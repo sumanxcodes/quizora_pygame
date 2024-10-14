@@ -8,7 +8,7 @@ def get_api_endpoint(endpoint_name):
         "logout": f"{BASE_URL}/logout/",
         "user_info": f"{BASE_URL}/user-info/",
         "quizzes": f"{BASE_URL}/quizzes/",
-        "questions": f"{BASE_URL}/questions/",
+        "questions": f"{BASE_URL}/questions/?quiz_id=",
         "quiz_result": f"{BASE_URL}/quizresults/",
         "gamesessions": f"{BASE_URL}/gamesessions/",
     }
