@@ -1,6 +1,6 @@
 '''
-src/settings.py defines all the necessary configuration settings -
-** Screen dimensions
+src/settings.py file defines configuration settings for the Quizora application, including screen dimensions 
+and UI element sizes.
 '''
 
 # screen dimensions

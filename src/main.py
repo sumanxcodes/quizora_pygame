@@ -1,4 +1,14 @@
-# main.py
+"""
+The main file initializes and runs the Quizora application..
+Key Components:
+- **State Management**: Manages multiple states including menu, login, post-login, leaderboard, quiz play, question, 
+  game session, and summary.
+- **UI Initialization**: Sets up the main game window, background, and UI manager with optional theme customization.
+- **State Transitions and Event Handling**: Switches between screens based on user interactions and processes events 
+  in each state to handle button clicks and other UI actions.
+- **Game Session Handling**: Clears and resets game data for each new quiz session to track scores and answer counts.
+"""
+
 import os
 import pygame
 import pygame_gui

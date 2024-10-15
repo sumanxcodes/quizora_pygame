@@ -1,4 +1,17 @@
-# states/leaderboard.py
+"""
+This file, `question_type.py`, provides the implementation of various question types and their interaction 
+handling...
+
+Main Components:
+- **display_multiple_choice**: Displays multiple-choice options as buttons in two columns.
+- **display_fill_in_the_blank**: Sets up a text entry field for fill-in-the-blank questions.
+- **display_drag_and_drop**: Manages drag-and-drop interactions for questions of this type.
+- **handle_question_events**: Main event handler that determines the selected answer’s correctness, moves to 
+  the next question if available, or ends the quiz if completed.
+- **handle_multiple_choice, handle_fill_in_the_blank, handle_drag_and_drop**: Specific handlers for each 
+  question type, updating score and visual feedback based on the user’s answers.
+"""
+
 import pygame
 import pygame_gui
 from pygame_gui.core import ObjectID

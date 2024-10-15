@@ -1,3 +1,11 @@
+"""
+This file  summary.py  displays the quiz summary in the Quizora application ...
+
+Main Function:
+- **show_summary_view**: Renders the summary screen at the end of a quiz, showing the final score, and the count of 
+  correct and incorrect answers. A 'Main Menu' button is provided to allow users to exit the summary view.
+"""
+
 import pygame
 import pygame_gui
 from pygame_gui.core import ObjectID

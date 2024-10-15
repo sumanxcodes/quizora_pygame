@@ -1,4 +1,14 @@
-# utils/api_endpoints.py
+"""
+The  api_endpoints.py file defines a utility function for managing API endpoints ...
+
+Components:
+- **BASE_URL**: Base URL for the API server, set to `http://localhost:8000/api`.
+- **get_api_endpoint**: Function that returns the full URL for a specified endpoint name. Supported endpoints include:
+  - `login`, `logout`, and `user_info` for authentication and user details.
+  - `get_user`, `quizzes`, `questions`, `quiz_result`, and `gamesessions` for quiz-related data management.
+
+"""
+
 
 BASE_URL = "http://localhost:8000/api"
 

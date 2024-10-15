@@ -1,4 +1,13 @@
-# states/post_login.py
+"""
+This file post_login.py, defines the post-login menu..
+
+Main Functions:
+- **enter_post_login**: Sets up the post-login menu with a welcome message and buttons for Play Quiz, Help, Leaderboard, 
+  and Quit
+- **handle_post_login_events**: Manages user interactions on the post-login screen, navigating to the selected section 
+  or quitting the application
+"""
+
 import pygame
 import pygame_gui
 from ui.leaderboard import enter_leaderboard

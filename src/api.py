@@ -1,4 +1,18 @@
 
+"""
+This file manages interactions with the backend server for quiz-related data and sessions..
+
+Main Functions:
+- **create_update_game_session**: Creates or updates a quiz session, including details like quiz ID, score, 
+  and answer count. Returns success status.
+- **fetch_quiz_questions**: Retrieves questions for a specified quiz from the server.
+- **fetch_quiz_data**: Gets available quizzes and details from the server.
+- **fetch_user_info**: Fetches logged-in user's info, including name and ID.
+- **submit_quiz_result**: Submits the quiz result, including score and feedback, at the end of the quiz.
+
+Enables server-side communication with CSRF protection.
+"""
+
 from session_manager import SessionManager
 from utils import get_api_endpoint
 from datetime import datetime

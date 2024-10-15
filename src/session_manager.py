@@ -1,3 +1,17 @@
+"""
+This file session_manager.py handles user authentication and session management for 
+API interactions ...
+
+Main Components:
+- **login**: Authenticates the user with provided credentials and stores the session upon successful login.
+- **get_session**: Retrieves the active session if the user is logged in.
+- **logout**: Clears the session and logs the user out.
+- **is_logged_in**: Checks if a session is currently active.
+
+SessionManager provides a centralized way to manage user sessions, enabling easy authentication checks 
+and session handling across the application.
+"""
+
 import requests
 from utils import get_api_endpoint
 

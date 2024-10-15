@@ -1,4 +1,18 @@
-# states/leaderboard.py
+"""
+This file leaderboard.py  provides functionality for displaying quizzes and handling 
+quiz-related events
+
+Main Functions:
+- **enter_quiz_view**: Shows the main quiz selection screen listing available quizzes as buttons to select.
+- **quiz_question_view**: Displays details about a selected quiz, including title, description, and question count.
+- **game_session_view**: Initiates a game session and displays quiz questions.
+- **show_question_view**: Display the current question based on type with answer options.
+- **handle_quiz_events**: Manages user interactions on quiz-related screens, transitioning to questions or other views.
+
+This setup enables a structured flow from selecting a quiz to answering questions, supporting various question types 
+such as multiple-choice, fill-in-the-blank, and drag-and-drop.
+"""
+
 import pygame
 import pygame_gui
 from pygame_gui.core import ObjectID

@@ -1,3 +1,14 @@
+"""
+This file menu.py defines the main menu screen.
+
+Main Functions:
+- **enter_menu**: Sets up the main menu with a welcome message and two buttons, Login and Quit. 
+  allowing users to access the login screen or exit the application.
+- **handle_menu_events**: Manages button interactions, transitioning to the login screen when 
+  Login is clicked or ending the application when Quit is clicked.
+"""
+
+
 import pygame
 import pygame_gui
 from pygame_gui.core import ObjectID

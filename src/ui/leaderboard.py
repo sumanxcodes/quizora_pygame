@@ -1,4 +1,15 @@
-# states/leaderboard.py
+"""
+This file, `leaderboard.py` manages the leaderboard screen.
+
+Main Functions:
+- **fetch_leaderboard_data**: Retrieves quiz results from the server.
+- **get_user_data**: Fetches specific user details using user id from the Users API.
+- **enter_leaderboard**: Displays the leaderboard showing player ranks based on cumulative quiz scores.
+
+The leaderboard is sorted by total score in descending order, with each player’s rank, username, and score displayed.
+Back button allows users to return to the previous menu.
+"""
+
 import pygame
 import pygame_gui
 from session_manager import SessionManager

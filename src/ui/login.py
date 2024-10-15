@@ -1,3 +1,16 @@
+"""
+This file login.py manages the login screen for the application.
+
+Main Functions:
+- **enter_login**: Sets up the login interface with fields for username and password, along with Login and Back buttons. 
+  An error label is also included for displaying login feedback.
+- **handle_login_events**: Manages interactions on the login screen, handling Login and Back button clicks. 
+  If login credentials are valid it navigates to the post-login screen; 
+  otherwise, it displays an error.
+
+"""
+
+
 import pygame
 import pygame_gui
 from pygame_gui.core import ObjectID
