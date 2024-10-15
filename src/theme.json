@@ -77,5 +77,22 @@
     "colours": {
       "normal_text": "#EEF0F2"
     }
+  },
+  "@summary_text": {
+    "font": {
+      "name": "PressStart2P",
+      "size": 18,
+      "regular_path": "./assets/fonts/PressStart2P-Regular.ttf"
+    },
+    "colours": {
+      "normal_text": "#EEF0F2"
+    }
+  },
+  "text_entry_line": {
+    "font": {
+      "name": "PressStart2P",
+      "size": 20,
+      "regular_path": "./assets/fonts/PressStart2P-Regular.ttf"
+    }
   }
 }

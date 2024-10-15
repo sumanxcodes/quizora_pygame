@@ -199,5 +199,6 @@ def handle_quiz_events(event, switch_state, current_buttons, state_data, is_runn
         for index, btn in enumerate(current_buttons):
             if event.ui_element == btn:
                 state_data['active_quiz_index'] = index
+                state_data['game_session']['quiz'] = index
                 state_data['question_data'] = fetch_quiz_questions(btn.quiz_id)
                 switch_state("question")

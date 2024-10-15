@@ -22,6 +22,23 @@ def fetch_leaderboard_data():
         print("User is not logged in.")
     return []
 
+def get_user_data(user_id):
+    """
+    Get user data from users API endpoints
+    """
+    session = SessionManager.get_session()
+    if session:
+        response = session.get(f"{get_api_endpoint("get_user")}{user_id}")
+        if response.status_code == 200:
+            return response.json()
+        else:
+            print("Failed to fetch leaderboard data:", response.status_code)
+    else:
+        print("User is not logged in.")
+    return []
+
+
+
 def enter_leaderboard(manager, window_surface, background, SCREEN_WIDTH, SCREEN_HEIGHT):
     """
     Display leaderboard with player rankings.
@@ -46,9 +63,11 @@ def enter_leaderboard(manager, window_surface, background, SCREEN_WIDTH, SCREEN_
     score_summary = defaultdict(int)
     for entry in leaderboard_data:
         # combine score
-        student = entry['student']
-        score = entry['score']
-        score_summary[student] += score
+        if(entry['student']):
+            user_data = get_user_data(entry['student'])
+            student = user_data['username']
+            score = entry['score']
+            score_summary[student] += score
 
     print(score_summary)
     # python lamda func and sorted func to sort in desc order

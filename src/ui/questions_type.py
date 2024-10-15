@@ -55,6 +55,8 @@ def display_fill_in_the_blank(question, manager, SCREEN_WIDTH, SCREEN_HEIGHT):
         relative_rect=pygame.Rect((SCREEN_WIDTH // 2 - 150, 180), (300, 50)),
         manager=manager
     )
+    manager.ui_theme.get_font('text_entry_line').size = 20
+
     answer_input.option_id = 'user_input'
     answer_buttons.append(answer_input)
 

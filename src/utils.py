@@ -7,6 +7,7 @@ def get_api_endpoint(endpoint_name):
         "login": f"{BASE_URL}/login/",
         "logout": f"{BASE_URL}/logout/",
         "user_info": f"{BASE_URL}/user-info/",
+        "get_user": f"{BASE_URL}/users/",
         "quizzes": f"{BASE_URL}/quizzes/",
         "questions": f"{BASE_URL}/questions/?quiz_id=",
         "quiz_result": f"{BASE_URL}/quizresults/",

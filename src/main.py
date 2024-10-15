@@ -68,7 +68,6 @@ LEADERBOARD_STATE = "leaderboard"
 PLAY_STATE = "play"
 QUESTION_STATE = "question"
 GAME_SESSION_STATE = "game_session"
-MULTIPLE_CHOICE_STATE = "multiple_choice"
 SUMMARY_STATE = "summary"
 
 # Initial state
@@ -180,6 +179,7 @@ while is_running[0]:
                 current_buttons = show_summary_view(manager, window_surface, background, SCREEN_WIDTH, SCREEN_HEIGHT, state_data)
                 state_initialized = True
             if event.type == pygame_gui.UI_BUTTON_PRESSED and event.ui_element == current_buttons[0]:  # Exit button
+                clear_game_session_data(state_data)
                 switch_state(POST_LOGIN_STATE)
 
     # Update UI elements based on the state
