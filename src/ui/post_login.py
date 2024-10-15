@@ -1,23 +1,12 @@
 # states/post_login.py
 import pygame
 import pygame_gui
-from session_manager import SessionManager
 from ui.leaderboard import enter_leaderboard
 from pygame_gui.core import ObjectID
 from settings import BTN_WIDTH, BTN_HEIGHT, LABEL_HEIGHT, LABEL_WIDTH, LARGE_LABEL_HEIGHT, LARGE_LABEL_WIDTH
-from utils import get_api_endpoint
+from api import fetch_user_info
 
-def fetch_user_info():
-    session = SessionManager.get_session()
-    if session:
-        response = session.get(get_api_endpoint("user_info"))
-        if response.status_code == 200:
-            user_info = response.json()
-            return user_info
-        else:
-            print("Failed to fetch user info:", response.status_code)
-    else:
-        print("User is not logged in.")
+
 
 def enter_post_login(manager, window_surface, background, SCREEN_WIDTH, SCREEN_HEIGHT, state_data):
     """

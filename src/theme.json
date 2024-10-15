@@ -67,5 +67,15 @@
       "size": 16,
       "regular_path": "./assets/fonts/PressStart2P-Regular.ttf"
     }
+  },
+  "@question_text": {
+    "font": {
+      "name": "PressStart2P",
+      "size": 24,
+      "regular_path": "./assets/fonts/PressStart2P-Regular.ttf"
+    },
+    "colours": {
+      "normal_text": "#EEF0F2"
+    }
   }
 }

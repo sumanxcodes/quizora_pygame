@@ -44,7 +44,17 @@ state_data = {
    "quiz_data": None,
    "question_data": None,
    "active_quiz_index": None,
-   "active_question_index": None
+   "active_question_index": 0,
+   "game_session": {
+        'id': None,
+        'quiz': None,
+        'duration': '00:00:00',
+        'status': 'in_progress',
+        'score': 0,
+        'correct_answers_count': 0
+    },
+   "game_session_id": None,
+   'answer_selected': False
 }
 
 # States for different screens
@@ -57,12 +67,31 @@ PLAY_STATE = "play"
 QUESTION_STATE = "question"
 GAME_SESSION_STATE = "game_session"
 MULTIPLE_CHOICE_STATE = "multiple_choice"
+SUMMARY_STATE = "summary"
 
 # Initial state
 current_state = MENU_STATE
 current_buttons = []
 state_initialized = False  # flag to control state initilization
 is_running = [True]
+
+def clear_game_session_data(state_data):
+    """
+    Clear game session-related data 
+    """
+    state_data["question_data"] = None
+    state_data["active_quiz_index"] = 0
+    state_data["active_question_index"] = 0
+    state_data["answer_selected"] = False
+    state_data["game_session"] =  {
+        'id': None,
+        'quiz': None,
+        'duration': '00:00:00',
+        'status': 'in_progress',
+        'score': 0,
+        'correct_answers_count': 0
+    }
+    state_data["game_session_id"] = ''
 
 
 def switch_state(new_state):
@@ -128,10 +157,23 @@ while is_running[0]:
             if not state_initialized:
                 current_buttons = game_session_view(manager, window_surface, background, SCREEN_WIDTH, SCREEN_HEIGHT, state_data)
                 state_initialized = True
-            if event.type == pygame_gui.UI_BUTTON_PRESSED and event.ui_element == current_buttons[-1]: # Last button is back button
-                switch_state(PLAY_STATE)
-            if event.type == pygame_gui.UI_BUTTON_PRESSED and event.ui_element != current_buttons[-1]: # options buttons
-                handle_question_events(event, switch_state, current_buttons, state_data, is_running)
+            if event.type == pygame_gui.UI_BUTTON_PRESSED:
+                # check back button is clicked
+                if event.ui_element == current_buttons[-1]:  # quit button
+                    clear_game_session_data(state_data)
+                    switch_state(POST_LOGIN_STATE)
+                elif event.ui_element == current_buttons[-2]:  # next button
+                    switch_state(GAME_SESSION_STATE)
+                # any options button  clicked
+                else:
+                    # check the user selected answers 
+                    for btn in current_buttons:
+                        if event.ui_element == btn:
+                            selected_answer = getattr(btn, 'option_id', None)
+                            handle_question_events(event, switch_state, current_buttons, selected_answer, state_data, is_running)
+                            break  
+        elif current_state == SUMMARY_STATE:
+            pass
 
     # Update UI elements based on the state
     manager.update(time_delta)
