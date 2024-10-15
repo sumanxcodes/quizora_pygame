@@ -76,7 +76,7 @@ def enter_leaderboard(manager, window_surface, background, SCREEN_WIDTH, SCREEN_
         # combine score
         if(entry['student']):
             user_data = get_user_data(entry['student'])
-            student = user_data['username']
+            student = f"{user_data['first_name']} {user_data['last_name']}" if user_data['first_name'] and user_data['last_name'] else user_data['username']
             score = entry['score']
             score_summary[student] += score
 

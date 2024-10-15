@@ -71,7 +71,7 @@
   "@question_text": {
     "font": {
       "name": "PressStart2P",
-      "size": 24,
+      "size": 20,
       "regular_path": "./assets/fonts/PressStart2P-Regular.ttf"
     },
     "colours": {
