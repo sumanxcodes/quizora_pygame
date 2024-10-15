@@ -155,7 +155,33 @@ def handle_multiple_choice(event, current_buttons, selected_answer, correct_opti
     
 
 def handle_fill_in_the_blank(event, current_buttons, correct_answer, state_data, current_question):
-    pass
+    """
+    Checks the answer for fill-in-the-blank questions.
+    """
+    # Get the text entry field and submit button from the current buttons
+    answer_input = next((btn for btn in current_buttons if getattr(btn, 'option_id', None) == 'user_input'), None)
+    submit_button = next((btn for btn in current_buttons if getattr(btn, 'option_id', None) == 'submit_answer'), None)
+
+    # Check if the submit button was pressed
+    if event.type == pygame_gui.UI_BUTTON_PRESSED and event.ui_element == submit_button:
+        user_answer = answer_input.get_text().strip().lower()
+        correct_answer_text = correct_answer['blank'].strip().lower()
+        submit_button.is_interactable = False
+        # Check if the answer is correct
+        if user_answer == correct_answer_text:
+            print("Correct answer!")
+            state_data['game_session']['correct_answers_count'] += 1
+            state_data['game_session']['score'] += current_question.get('points', 1) 
+            submit_button.set_text("Correct")
+            submit_button.is_interactable = False
+            submit_button.colours['normal_bg'] = pygame.Color("#008000")  # Green for correct
+        else:
+            print("Incorrect answer.")
+            submit_button.set_text("Incorrect")
+            submit_button.is_interactable = False
+            submit_button.colours['normal_bg'] = pygame.Color("#FF0000") 
+            
+        submit_button.rebuild()  # Update the button with new text/color
 
 def handle_drag_and_drop(event, selected_answer, correct_answer, state_data, current_question):
     """

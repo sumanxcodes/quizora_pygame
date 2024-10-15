@@ -23,12 +23,12 @@ def create_update_game_session(game_session, session_id=None):
                 # Update the existing game session
                 temp_game_session = game_session.copy()
                 temp_game_session.pop('id', None) 
-                update_endpoint = f"{get_api_endpoint("gamesessions")}{session_id}/"
+                update_endpoint = f"{get_api_endpoint('gamesessions')}{session_id}/"
                 print(update_endpoint)
                 response = session.put(update_endpoint, json=temp_game_session, headers=headers)
             else:
                 # Create a new game session
-                response = session.post(get_api_endpoint("gamesessions"), json=game_session, headers=headers)
+                response = session.post(get_api_endpoint('gamesessions'), json=game_session, headers=headers)
             if response.status_code in [200, 201]:
                 print("Game session created or updated successfully!")
                 game_session['id'] = response.json().get('id')  # Store session ID if created

@@ -9,6 +9,8 @@ from ui.post_login import enter_post_login, handle_post_login_events
 from ui.leaderboard import enter_leaderboard
 from ui.play import enter_quiz_view, handle_quiz_events, quiz_question_view, game_session_view
 from ui.questions_type import handle_question_events
+from ui.summary import show_summary_view
+
 
 # Initialize Pygame
 pygame.init()
@@ -173,7 +175,12 @@ while is_running[0]:
                             handle_question_events(event, switch_state, current_buttons, selected_answer, state_data, is_running)
                             break  
         elif current_state == SUMMARY_STATE:
-            pass
+            print("Summary state")
+            if not state_initialized:
+                current_buttons = show_summary_view(manager, window_surface, background, SCREEN_WIDTH, SCREEN_HEIGHT, state_data)
+                state_initialized = True
+            if event.type == pygame_gui.UI_BUTTON_PRESSED and event.ui_element == current_buttons[0]:  # Exit button
+                switch_state(POST_LOGIN_STATE)
 
     # Update UI elements based on the state
     manager.update(time_delta)
