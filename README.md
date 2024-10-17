@@ -28,20 +28,37 @@ pip install -r requirements.txt
 ## Project Structure
 
 ```
-├── assets
-│   ├── data
-│   ├── fonts
-│   │   ├── PressStart2P-Regular.ttf
-│   └── images
-│       └── dino
-├── src
-│   ├── ui
+QUIZORA_PYGAME/
+├── assets/
+│   ├── data/
+│   ├── fonts/
+│   │   ├── OFL.txt
+│   │   └── PressStart2P-Regular.ttf
+│   ├── images/
+│   └── sound/
+├── quizora_game_env/
+├── src/
+│   ├── __pycache__/
+│   ├── ui/
+│   │   ├── __pycache__/
+│   │   ├── leaderboard.py
+│   │   ├── login.py
+│   │   ├── menu.py
+│   │   ├── play.py
+│   │   ├── post_login.py
+│   │   ├── questions_type.py
+│   │   ├── summary.py
+│   └── api.py
 │   ├── main.py
+│   ├── requirements.txt
+│   ├── session_manager.py
 │   ├── settings.py
-│   └── theme.json
+│   ├── theme.json
+│   └── utils.py
 ├── .gitignore
-├── requirements.txt
+├── LICENSE
 └── README.md
+
 ```
 
 ### Setup
